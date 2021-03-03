@@ -1,10 +1,10 @@
-FROM alpine:latest
+FROM    alpine:latest
 
 # update
-RUN apk update
+RUN     apk update
 
 # install
-RUN apk add --no-cache \
+RUN     apk add --no-cache \
         # php
         php7 \
         php7-fpm \
@@ -31,6 +31,6 @@ COPY    ./srcs/wp-config.php ./wordpress
 RUN     chmod 640 ./wordpress/wp-config.php
 RUN     rm -f ./wordoress/wp-config-sample.php
 
-EXPOSE 5050
+EXPOSE  5050
 
-CMD tail -f /dev/null
+CMD     php -S 0.0.0.0:80 -t /wordpress
