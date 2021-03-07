@@ -1,5 +1,9 @@
 FROM    alpine:latest
 
+# apk update
+RUN     apk update
+
+# apk install
 RUN     apk add --no-cache \
         # ftps
         vsftpd \
@@ -9,6 +13,11 @@ RUN     apk add --no-cache \
         openssl \
         openssh
 
+# copy setupfile
+COPY    srcs/vsftpd.conf etc/vsftpd/
+COPY    srcs/main.sh /
+
+# ssl setup
 RUN     openssl req -newkey rsa:4096 \
         -x509 \
         -sha256 \
@@ -18,12 +27,20 @@ RUN     openssl req -newkey rsa:4096 \
         -keyout /etc/ssl/example.key \
         -subj "/C=JP/ST=Tokyo/L=kodaira/O=42tokyo/OU=42tokyo/CN=localhost"
 
+# telegraf setup
+RUN     mkdir -p /etc/telegraf/
+COPY    srcs/telegraf.conf /etc/telegraf
+RUN     apk add --no-cache \
+        telegraf
+
+# nginx setup
 RUN     mkdir -p /etc/ftps/ftp_user
 RUN     adduser --home=/etc/ftps/ftp_user -D ftp_user
 RUN     echo "ftp_user:password" | chpasswd
 
-COPY    srcs/vsftpd.conf etc/vsftpd/
-
+# port setup
 EXPOSE  21 30000-30010
 
-CMD     vsftpd /etc/vsftpd/vsftpd.conf
+CMD     sh ./main.sh
+# CMD     tail -f /dev/null
+# CMD     {telegraf &} && vsftpd /etc/vsftpd/vsftpd.conf
