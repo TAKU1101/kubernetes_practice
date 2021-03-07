@@ -1,12 +1,13 @@
 FROM    alpine:latest
 
+# apk update
+RUN     apk update
+
+# cpoy setupfile
 COPY    srcs/nginx.conf /etc/nginx/nginx.conf
 COPY    srcs/main.sh /
 
-RUN     mkdir -p /run/nginx
-
-RUN     apk update
-
+# apk install
 RUN     apk add --no-cache \
         # nginx
         nginx \
@@ -16,6 +17,7 @@ RUN     apk add --no-cache \
         openssl \
         openssh
 
+# setup ssl
 RUN     openssl req -newkey rsa:4096 \
         -x509 \
         -sha256 \
@@ -25,6 +27,17 @@ RUN     openssl req -newkey rsa:4096 \
         -keyout /etc/ssl/example.key \
         -subj "/C=JP/ST=Tokyo/L=kodaira/O=42tokyo/OU=42tokyo/CN=localhost"
 
+# setup nginx
+RUN     mkdir -p /run/nginx
+
+# telegraf setup
+RUN     mkdir -p /etc/telegraf/
+COPY    srcs/telegraf.conf /etc/telegraf
+RUN     apk add --no-cache \
+        telegraf
+
+# setup port
 EXPOSE  22 80 433
 
-CMD     nginx -g "daemon off;"
+CMD     sh ./main.sh
+# CMD     nginx -g "daemon off;"
