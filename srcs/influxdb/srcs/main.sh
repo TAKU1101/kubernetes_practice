@@ -1,0 +1,3 @@
+telegraf &
+
+/usr/sbin/influxd

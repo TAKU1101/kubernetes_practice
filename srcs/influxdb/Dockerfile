@@ -1,5 +1,12 @@
 FROM    alpine:latest
 
+# apk update
+RUN     apk update
+
+# copy setupfile
+COPY    srcs/main.sh /
+
+# apk install
 RUN     apk add --no-cache \
         # nginx
         influxdb \
@@ -9,6 +16,14 @@ RUN     apk add --no-cache \
         openssl \
         openssh
 
+# telegraf setup
+RUN     mkdir -p /etc/telegraf/
+COPY    srcs/telegraf.conf /etc/telegraf
+RUN     apk add --no-cache \
+        telegraf
+
+#setup port
 EXPOSE  8086
 
-CMD     /usr/sbin/influxd
+CMD     sh ./main.sh
+# CMD     /usr/sbin/influxd
