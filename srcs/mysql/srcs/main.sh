@@ -11,4 +11,6 @@ mysql -e "FLUSH PRIVILEGES;"
 
 # mysql -u root
 
+telegraf &
+
 tail -f /dev/null
