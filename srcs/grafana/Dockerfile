@@ -1,11 +1,12 @@
 FROM    alpine:latest
 
-RUN     mkdir -p /usr/share/grafana/conf/provisioning/dashboards
-COPY    srcs/dashboard.yaml /usr/share/grafana/conf/provisioning/dashboards
-RUN     mkdir -p /usr/share/grafana/conf/provisioning/datasources
-COPY    srcs/datasource.yaml /usr/share/grafana/conf/provisioning/datasources
-# COPY    srcs/grafana.ini /etc
+# apk update
+RUN     apk update
 
+# copy setupfile
+COPY    srcs/main.sh /
+
+# apk install
 RUN     apk add --no-cache \
         # grafana
         grafana \
@@ -15,6 +16,20 @@ RUN     apk add --no-cache \
         openssl \
         openssh
 
+# grafana setup
+RUN     mkdir -p /usr/share/grafana/conf/provisioning/dashboards
+COPY    srcs/dashboard.yaml /usr/share/grafana/conf/provisioning/dashboards
+RUN     mkdir -p /usr/share/grafana/conf/provisioning/datasources
+COPY    srcs/datasource.yaml /usr/share/grafana/conf/provisioning/datasources
+
+# telegraf setup
+RUN     mkdir -p /etc/telegraf/
+COPY    srcs/telegraf.conf /etc/telegraf
+RUN     apk add --no-cache \
+        telegraf
+
+# setup port
 EXPOSE  3000
 
-CMD     grafana-server --homepath=/usr/share/grafana
+CMD     sh ./main.sh
+# CMD     grafana-server --homepath=/usr/share/grafana
