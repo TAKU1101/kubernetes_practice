@@ -1,8 +1,12 @@
 FROM    alpine:latest
 
+# apk update
 RUN     apk update
 
-# install
+# copy setupfile
+COPY    srcs/main.sh /
+
+# apk install
 RUN     apk add --no-cache \
         # php
         php7 \
@@ -21,13 +25,21 @@ RUN     apk add --no-cache \
         openssl \
         openssh
 
-# phpMyAdmin
+# setup phpMyAdmin
 RUN     wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.tar.gz
 RUN     tar -xvzf phpMyAdmin-4.8.3-all-languages.tar.gz
 RUN     mv phpMyAdmin-4.8.3-all-languages phpmyadmin
 COPY    srcs/config.inc.php /phpmyadmin
 RUN     rm -f phpMyAdmin-4.8.3-all-languages.tar.gz
 
+# telegraf setup
+RUN     mkdir -p /etc/telegraf/
+COPY    srcs/telegraf.conf /etc/telegraf
+RUN     apk add --no-cache \
+        telegraf
+
+# setup port
 EXPOSE  5000
 
-CMD     /usr/bin/php -S 0.0.0.0:80 -t /phpmyadmin
+CMD     sh ./main.sh
+# CMD     /usr/bin/php -S 0.0.0.0:80 -t /phpmyadmin

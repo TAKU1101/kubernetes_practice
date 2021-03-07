@@ -3,7 +3,7 @@ FROM    alpine:latest
 # apk update
 RUN     apk update
 
-# cpoy setupfile
+# copy setupfile
 COPY    srcs/nginx.conf /etc/nginx/nginx.conf
 COPY    srcs/main.sh /
 
