@@ -27,5 +27,5 @@ minikube_setup()
     # kubectl apply -f srcs/yamls/nginx_service.yaml
 }
 
-# build_all_images
+build_all_images
 minikube_setup
