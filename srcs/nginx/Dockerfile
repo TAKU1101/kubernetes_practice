@@ -37,7 +37,7 @@ RUN     apk add --no-cache \
         telegraf
 
 # setup port
-EXPOSE  22 80 433
+EXPOSE  22 80 443
 
 CMD     sh ./main.sh
 # CMD     nginx -g "daemon off;"
