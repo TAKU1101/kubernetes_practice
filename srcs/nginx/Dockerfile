@@ -6,6 +6,7 @@ RUN     apk update
 # copy setupfile
 COPY    srcs/nginx.conf /etc/nginx/nginx.conf
 COPY    srcs/main.sh /
+COPY    srcs/index.html /var/www/nginx/
 
 # apk install
 RUN     apk add --no-cache \
