@@ -6,12 +6,13 @@ RUN     apk update
 # copy setupfile
 COPY    srcs/main.sh /
 COPY    srcs/my.cnf /etc/my.cnf
+COPY    srcs/wordpress.sql /
 
 # apk install
 RUN     apk add --no-cache \
         # mysql
-        mysql \
-        mysql-client \
+        mariadb \
+        mariadb-client\
         # other
         wget \
         vim \

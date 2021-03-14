@@ -26,6 +26,7 @@ RUN     apk add --no-cache \
         openssh
 
 # setup wordpress
+RUN	mkdir -p /usr/share/webapps/
 RUN     wget https://ja.wordpress.org/latest-ja.tar.gz
 RUN     tar -zxvf latest-ja.tar.gz
 RUN     rm -f latest-ja.tar.gz
@@ -33,6 +34,8 @@ COPY    ./srcs/wp-config.php ./wordpress
 # RUN     chown -R www-data:www-data ./wordpress
 RUN     chmod 640 ./wordpress/wp-config.php
 RUN     rm -f ./wordoress/wp-config-sample.php
+RUN     mkdir -p /var/www
+RUN     mv /wordpress /var/www
 
 # telegraf setup
 RUN     mkdir -p /etc/telegraf/
@@ -43,5 +46,6 @@ RUN     apk add --no-cache \
 # setup port
 EXPOSE  5050
 
+# CMD     tail -f /dev/null
 CMD     sh ./main.sh
 # CMD     php -S 0.0.0.0:80 -t /wordpress

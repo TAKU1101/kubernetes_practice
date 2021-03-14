@@ -5,9 +5,15 @@ metadata:
     app: nginx
   name: nginx
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -16,7 +22,7 @@ spec:
       containers:
       - image: nginx_image
         name: nginx
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
 
@@ -25,21 +31,23 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: nginx
   name: nginx
 spec:
   selector: 
     app: nginx
   ports:
-  - protocol: TCP
-    name: http
+  - name: http
+    protocol: TCP
     port: 80
     targetPort: 80
-  - protocol: TCP
-    name: https
+  - name: https
+    protocol: TCP
     port: 443
     targetPort: 443
-  - protocol: TCP
-    name: ssh
+  - name: ssh
+    protocol: TCP
     port: 22
     targetPort: 22
   type: LoadBalancer

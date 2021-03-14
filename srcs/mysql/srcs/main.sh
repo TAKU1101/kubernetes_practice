@@ -1,13 +1,14 @@
-mysql_install_db
+mysql_install_db -u root
 
 mkdir -p run/mysqld/
 touch run/mysqld/mysqld.sock
-mysqld -u root & sleep 3
+mysqld -u root & sleep 5
 
-mysql -e "CREATE DATABASE wpdb;"
-mysql -e "CREATE USER 'wpuser'@'localhost' identified by 'dbpassword';"
-mysql -e "GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'localhost';"
-mysql -e "FLUSH PRIVILEGES;"
+mysql -u root -e "CREATE DATABASE wordpress;"
+
+mysql wordpress -u root < wordpress.sql
+
+mysql -u root -e "CREATE USER 'wp_user'@'%' identified by 'password'; GRANT ALL PRIVILEGES ON *.* TO 'wp_user'@'%' WITH GRANT OPTION; USE wordpress; FLUSH PRIVILEGES;"
 
 # mysql -u root
 

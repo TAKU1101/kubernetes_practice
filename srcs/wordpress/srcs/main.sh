@@ -1,3 +1,3 @@
 telegraf &
 
-php -S 0.0.0.0:80 -t /wordpress
+php -S 0.0.0.0:5050 -t /var/www/wordpress/

@@ -39,7 +39,7 @@ RUN     adduser --home=/etc/ftps/ftp_user -D ftp_user
 RUN     echo "ftp_user:password" | chpasswd
 
 # port setup
-EXPOSE  21 30000-30010
+EXPOSE  21 30000
 
 CMD     sh ./main.sh
 # CMD     tail -f /dev/null
