@@ -31,6 +31,8 @@ RUN     tar -xvzf phpMyAdmin-4.8.3-all-languages.tar.gz
 RUN     mv phpMyAdmin-4.8.3-all-languages phpmyadmin
 COPY    srcs/config.inc.php /phpmyadmin
 RUN     rm -f phpMyAdmin-4.8.3-all-languages.tar.gz
+RUN     mkdir -p /var/www
+RUN     mv phpmyadmin /var/www
 
 # telegraf setup
 RUN     mkdir -p /etc/telegraf/
