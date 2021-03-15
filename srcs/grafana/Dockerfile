@@ -22,6 +22,9 @@ COPY    srcs/dashboard.yaml /usr/share/grafana/conf/provisioning/dashboards
 RUN     mkdir -p /usr/share/grafana/conf/provisioning/datasources
 COPY    srcs/datasource.yaml /usr/share/grafana/conf/provisioning/datasources
 
+# copy grafana data
+COPY    srcs/nginx.json /usr/share/grafana/conf/provisioning/dashboards
+
 # telegraf setup
 RUN     mkdir -p /etc/telegraf/
 COPY    srcs/telegraf.conf /etc/telegraf

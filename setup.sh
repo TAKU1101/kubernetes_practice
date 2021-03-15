@@ -36,5 +36,24 @@ minikube_setup()
     # kubectl apply -f srcs/yamls/nginx_service.yaml
 }
 
-build_all_images
-minikube_setup
+grafana_dataset()
+{
+    echo $1
+    name=$(kubectl get pods -o=name | grep $1 | sed "s/^.\{4\}//")
+    cp srcs/grafana/srcs/dashboard.json srcs/grafana/srcs/$1.json
+    sed -i "s/__dashboard_value__/$name/" srcs/grafana/srcs/$1.json
+    sed -i "s/__dashboard_title__/$1/" srcs/grafana/srcs/$1.json
+    kubectl exec -i $(kubectl get pods -o=name | grep grafana | sed "s/^.\{4\}//") -- /bin/sh -c "cat > /usr/share/grafana/conf/provisioning/dashboards/$1.json" < srcs/grafana/srcs/$1.json
+}
+
+grafana_all_dataset()
+{
+    for image in "nginx" "wordpress" "mysql" "phpmyadmin" "ftps" "grafana" "influxdb"
+    do
+        grafana_dataset $image
+    done
+}
+
+# build_all_images
+# minikube_setup
+grafana_all_dataset
