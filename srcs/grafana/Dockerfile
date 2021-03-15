@@ -31,5 +31,6 @@ RUN     apk add --no-cache \
 # setup port
 EXPOSE  3000
 
+# CMD     tail -f /dev/null
 CMD     sh ./main.sh
 # CMD     grafana-server --homepath=/usr/share/grafana
