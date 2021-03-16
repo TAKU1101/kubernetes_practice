@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "nginx-58fd7b64c4-7stw9"
+              "value": "nginx"
             }
           ]
         }

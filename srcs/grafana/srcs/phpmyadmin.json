@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "phpmyadmin-c69fdc95b-ngkqv"
+              "value": "phpmyadmin"
             }
           ]
         }

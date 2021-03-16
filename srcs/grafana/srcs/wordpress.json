@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "wordpress-54b58dd7c-rkd9m"
+              "value": "wordpress"
             }
           ]
         }

@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "grafana-69659fd9d9-rckjv"
+              "value": "grafana"
             }
           ]
         }

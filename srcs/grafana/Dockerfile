@@ -23,7 +23,13 @@ RUN     mkdir -p /usr/share/grafana/conf/provisioning/datasources
 COPY    srcs/datasource.yaml /usr/share/grafana/conf/provisioning/datasources
 
 # copy grafana data
+COPY    srcs/ftps.json /usr/share/grafana/conf/provisioning/dashboards
+COPY    srcs/grafana.json /usr/share/grafana/conf/provisioning/dashboards
+COPY    srcs/influxdb.json /usr/share/grafana/conf/provisioning/dashboards
+COPY    srcs/mysql.json /usr/share/grafana/conf/provisioning/dashboards
 COPY    srcs/nginx.json /usr/share/grafana/conf/provisioning/dashboards
+COPY    srcs/phpmyadmin.json /usr/share/grafana/conf/provisioning/dashboards
+COPY    srcs/wordpress.json /usr/share/grafana/conf/provisioning/dashboards
 
 # telegraf setup
 RUN     mkdir -p /etc/telegraf/

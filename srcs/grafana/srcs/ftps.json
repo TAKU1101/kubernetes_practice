@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "ftps-6587fb7b65-pj4gr"
+              "value": "ftps"
             }
           ]
         }

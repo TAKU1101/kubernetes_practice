@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "mysql-776bff9d6c-ctbnt"
+              "value": "mysql"
             }
           ]
         }

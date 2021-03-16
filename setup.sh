@@ -54,6 +54,6 @@ grafana_all_dataset()
     done
 }
 
-# build_all_images
-# minikube_setup
-grafana_all_dataset
+build_all_images
+minikube_setup
+# grafana_all_dataset

@@ -104,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "influxdb-7c66cb9b89-vxnzh"
+              "value": "influxdb"
             }
           ]
         }
