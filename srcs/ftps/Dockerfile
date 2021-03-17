@@ -23,8 +23,8 @@ RUN     openssl req -newkey rsa:4096 \
         -sha256 \
         -days 10 \
         -nodes \
-        -out /etc/ssl/example.pem \
-        -keyout /etc/ssl/example.key \
+        -out /etc/vsftpd/server.crt \
+        -keyout /etc/vsftpd/server.key \
         -subj "/C=JP/ST=Tokyo/L=kodaira/O=42tokyo/OU=42tokyo/CN=localhost"
 
 # telegraf setup
@@ -33,13 +33,16 @@ COPY    srcs/telegraf.conf /etc/telegraf
 RUN     apk add --no-cache \
         telegraf
 
-# nginx setup
+# ftps setup
 RUN     mkdir -p /etc/ftps/ftp_user
 RUN     adduser --home=/etc/ftps/ftp_user -D ftp_user
-RUN     echo "ftp_user:password" | chpasswd
+RUN     echo "ftp_user:pass" | chpasswd
+RUN     mkdir -p /etc/vsftpd
+RUN     echo "ftp_user" >> /etc/vsftpd/user_list
+RUN     echo "ftp_user" >> /etc/vsftpd/chroot_list
 
 # port setup
-EXPOSE  21 30000
+EXPOSE  21 30021
 
 CMD     sh ./main.sh
 # CMD     tail -f /dev/null

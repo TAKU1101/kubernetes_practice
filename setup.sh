@@ -55,5 +55,6 @@ grafana_all_dataset()
 }
 
 build_all_images
+# build_image "ftps"
 minikube_setup
 # grafana_all_dataset
