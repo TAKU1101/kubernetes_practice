@@ -24,14 +24,23 @@ minikube_setup()
     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
     # On first install only
     kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-    kubectl apply -f srcs/yamls/nginx.yaml
     kubectl apply -f srcs/yamls/metallb-config.yaml
-    kubectl apply -f srcs/yamls/wordpress.yaml
-    kubectl apply -f srcs/yamls/ftps.yaml
-    kubectl apply -f srcs/yamls/grafana.yaml
-    kubectl apply -f srcs/yamls/influxdb.yaml
-    kubectl apply -f srcs/yamls/mysql.yaml
-    kubectl apply -f srcs/yamls/phpmyadmin.yaml
+    kubectl apply -f srcs/yamls/nginx-service.yaml
+    kubectl apply -f srcs/yamls/nginx-deployment.yaml
+    kubectl apply -f srcs/yamls/wordpress-service.yaml
+    kubectl apply -f srcs/yamls/wordpress-deployment.yaml
+    kubectl apply -f srcs/yamls/ftps-service.yaml
+    kubectl apply -f srcs/yamls/ftps-deployment.yaml
+    kubectl apply -f srcs/yamls/grafana-service.yaml
+    kubectl apply -f srcs/yamls/grafana-deployment.yaml
+    kubectl apply -f srcs/yamls/phpmyadmin-service.yaml
+    kubectl apply -f srcs/yamls/phpmyadmin-deployment.yaml
+    kubectl apply -f srcs/yamls/influxdb-service.yaml
+    kubectl apply -f srcs/yamls/influxdb-deployment.yaml
+    kubectl apply -f srcs/yamls/influxdb-persistentVolumeClaim.yaml
+    kubectl apply -f srcs/yamls/mysql-service.yaml
+    kubectl apply -f srcs/yamls/mysql-deployment.yaml
+    kubectl apply -f srcs/yamls/mysql-persistentVolumeClaim.yaml
     # kubectl apply -f srcs/yamls/nginx_pod.yaml
     # kubectl apply -f srcs/yamls/nginx_service.yaml
 }
@@ -54,7 +63,6 @@ grafana_all_dataset()
     done
 }
 
-# build_all_images
-build_image "ftps"
+build_all_images
 minikube_setup
 # grafana_all_dataset

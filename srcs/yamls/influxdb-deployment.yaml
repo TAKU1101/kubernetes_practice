@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+#  strategy:
+#    rollingUpdate:
+#      maxSurge: 25%
+#      maxUnavailable: 25%
+#    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - image: influxdb_image
+        imagePullPolicy: Never
+        name: influxdb
+        ports:
+        - name:
+          containerPort: 8086
+        volumeMounts:
+        - name: influxdb-persistent-storage
+          mountPath: /root
+      volumes:
+        - name: influxdb-persistent-storage
+          persistentVolumeClaim:
+            claimName: influxdb-pvc

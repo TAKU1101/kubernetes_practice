@@ -28,6 +28,11 @@ RUN     openssl req -newkey rsa:4096 \
         -keyout /etc/ssl/example.key \
         -subj "/C=JP/ST=Tokyo/L=kodaira/O=42tokyo/OU=42tokyo/CN=localhost"
 
+# setup ssh
+RUN     ssh-keygen -A
+RUN     adduser -D user
+RUN	echo "user:pass" | chpasswd
+
 # setup nginx
 RUN     mkdir -p /run/nginx
 

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+#  strategy:
+#    rollingUpdate:
+#      maxSurge: 25%
+#      maxUnavailable: 25%
+#    type: RollingUpdate
+  template:
+    metadata:
+#      creationTimestamp: null
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - image: wordpress_image
+        imagePullPolicy: Never
+        name: wordpress
+        ports:
+        - containerPort: 5050
