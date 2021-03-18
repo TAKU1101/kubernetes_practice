@@ -9,20 +9,15 @@ spec:
   selector:
     matchLabels:
       app: influxdb
-#  strategy:
-#    rollingUpdate:
-#      maxSurge: 25%
-#      maxUnavailable: 25%
-#    type: RollingUpdate
   template:
     metadata:
       labels:
         app: influxdb
     spec:
       containers:
-      - image: influxdb_image
+      - name: influxdb
+        image: influxdb_image
         imagePullPolicy: Never
-        name: influxdb
         ports:
         - name:
           containerPort: 8086

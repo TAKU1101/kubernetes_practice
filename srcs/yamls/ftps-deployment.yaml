@@ -9,21 +9,15 @@ spec:
   selector:
     matchLabels:
       app: ftps
-#  strategy:
-#    rollingUpdate:
-#      maxSurge: 25%
-#      maxUnavailable: 25%
-#    type: RollingUpdate
   template:
     metadata:
-#      creationTimestamp: null
       labels:
         app: ftps
     spec:
       containers:
-      - image: ftps_image
+      - name: ftps
+        image: ftps_image
         imagePullPolicy: Never
-        name: ftps
         ports:
         - containerPort: 21
         - containerPort: 50000

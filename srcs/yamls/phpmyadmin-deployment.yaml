@@ -9,17 +9,12 @@ spec:
   selector:
     matchLabels:
       app: phpmyadmin
-#  strategy:
-#    rollingUpdate:
-#      maxSurge: 25%
-#      maxUnavailable: 25%
-#    type: RollingUpdate
   template:
     metadata:
       labels:
         app: phpmyadmin
     spec:
       containers:
-      - image: phpmyadmin_image
+      - name: phpmyadmin
+        image: phpmyadmin_image
         imagePullPolicy: Never
-        name: phpmyadmin

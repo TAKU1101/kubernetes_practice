@@ -9,19 +9,14 @@ spec:
   selector:
     matchLabels:
       app: nginx
-#  strategy:
-#    rollingUpdate:
-#      maxSurge: 25%
-#      maxUnavailable: 25%
-#    type: RollingUpdate
   template:
     metadata:
       labels:
         app: nginx
     spec:
       containers:
-      - image: nginx_image
-        name: nginx
+      - name: nginx
+        image: nginx_image
         imagePullPolicy: Never
         ports:
         - containerPort: 80

@@ -9,20 +9,15 @@ spec:
   selector:
     matchLabels:
       app: mysql
-#  strategy:
-#    rollingUpdate:
-#      maxSurge: 25%
-#      maxUnavailable: 25%
-#    type: RollingUpdate
   template:
     metadata:
       labels:
         app: mysql
     spec:
       containers:
-      - image: mysql_image
+      - name: mysql
+        image: mysql_image
         imagePullPolicy: Never
-        name: mysql
         ports:
         - name: mysql
           containerPort: 3306
