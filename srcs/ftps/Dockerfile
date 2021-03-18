@@ -42,7 +42,7 @@ RUN     echo "ftp_user" >> /etc/vsftpd/user_list
 RUN     echo "ftp_user" >> /etc/vsftpd/chroot_list
 
 # port setup
-EXPOSE  21 30021
+EXPOSE  21 50000-50001
 
 CMD     sh ./main.sh
 # CMD     tail -f /dev/null
