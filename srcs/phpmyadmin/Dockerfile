@@ -8,6 +8,8 @@ COPY    srcs/main.sh /
 
 # apk install
 RUN     apk add --no-cache \
+        # nginx
+        nginx \
         # php
         php7 \
         php7-fpm \
@@ -33,6 +35,9 @@ COPY    srcs/config.inc.php /phpmyadmin
 RUN     rm -f phpMyAdmin-4.8.3-all-languages.tar.gz
 RUN     mkdir -p /var/www
 RUN     mv phpmyadmin /var/www
+
+# setup nginx
+RUN     mkdir -p /run/nginx
 
 # telegraf setup
 RUN     mkdir -p /etc/telegraf/
