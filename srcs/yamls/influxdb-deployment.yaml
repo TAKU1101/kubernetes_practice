@@ -22,9 +22,9 @@ spec:
         - name:
           containerPort: 8086
         volumeMounts:
-        - name: influxdb-persistent-storage
+        - name: influxdb-volume
           mountPath: /root
       volumes:
-        - name: influxdb-persistent-storage
+        - name: influxdb-volume
           persistentVolumeClaim:
-            claimName: influxdb-pvc
+            claimName: influxdb-persistent
