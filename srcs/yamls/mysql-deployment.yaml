@@ -21,6 +21,16 @@ spec:
         ports:
         - name: mysql
           containerPort: 3306
+        livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep mysqld'
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 3
         volumeMounts:
         - name: mysql-volume
           mountPath: var/lib/mysql

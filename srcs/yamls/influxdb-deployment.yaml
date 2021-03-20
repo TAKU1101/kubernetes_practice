@@ -21,6 +21,16 @@ spec:
         ports:
         - name:
           containerPort: 8086
+        livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep influxd'
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 3
         volumeMounts:
         - name: influxdb-volume
           mountPath: /root

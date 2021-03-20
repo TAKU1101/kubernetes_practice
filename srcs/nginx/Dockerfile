@@ -31,7 +31,7 @@ RUN     openssl req -newkey rsa:4096 \
 # setup ssh
 RUN     ssh-keygen -A
 RUN     adduser -D user
-RUN	echo "user:pass" | chpasswd
+RUN     echo "user:pass" | chpasswd
 
 # setup nginx
 RUN     mkdir -p /run/nginx

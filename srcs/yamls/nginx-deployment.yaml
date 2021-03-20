@@ -20,3 +20,13 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 80
+        livenessProbe:
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - 'pgrep telegraf && pgrep "nginx: master" && pgrep "nginx: worker" && pgrep sshd'
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 3
