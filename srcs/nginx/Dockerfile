@@ -7,6 +7,8 @@ RUN     apk update
 COPY    srcs/nginx.conf /etc/nginx/nginx.conf
 COPY    srcs/main.sh /
 COPY    srcs/index.html /var/www/nginx/
+RUN     chmod -R 755 /var/www/nginx/
+# RUN     chown -R nginx:nginx /var/www/nginx/
 
 # apk install
 RUN     apk add --no-cache \
