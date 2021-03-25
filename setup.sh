@@ -41,8 +41,6 @@ minikube_setup()
     kubectl apply -f srcs/yamls/mysql-service.yaml
     kubectl apply -f srcs/yamls/mysql-deployment.yaml
     kubectl apply -f srcs/yamls/mysql-persistentVolumeClaim.yaml
-    # kubectl apply -f srcs/yamls/nginx_pod.yaml
-    # kubectl apply -f srcs/yamls/nginx_service.yaml
 }
 
 grafana_dataset()

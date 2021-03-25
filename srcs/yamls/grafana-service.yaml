@@ -4,6 +4,8 @@ metadata:
   name: grafana
   labels:
     app: grafana
+  annotations:
+    metallb.universe.tf/allow-shared-ip: ft_services
 spec:
   selector:
     app: grafana
@@ -13,4 +15,4 @@ spec:
     port: 3000
     targetPort: 3000
   type: LoadBalancer
-  loadBalancerIP: 192.168.10.13
+  loadBalancerIP: 192.168.10.10

@@ -28,4 +28,5 @@ RUN     apk add --no-cache \
 # setup port
 EXPOSE  3306
 
+# CMD     tail -f /dev/null
 CMD     sh main.sh
